@@ -16,3 +16,5 @@ def even_indexes():
     return
 if __name__ == '__main__':
     even_indexes()
+
+# FIN
