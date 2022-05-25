@@ -17,7 +17,7 @@ def simple_number(num):
 
         n += 1
     time_f = time.time()
-    # print(time_f - time_s)
+    print(time_f - time_s)
     # я не могу понять в чем ошибка, но у меня в последовательность простых чисел вклинилась 4.
     # из за этого страдает нумерация на одну позицию, для 2, 3 всё верно, для последующих чисел - показывает простое число на предыдущей позиции.
     # simple_numberz.remove(4)
@@ -31,26 +31,33 @@ def simple_number(num):
 
 
 def simple_number_reweto_eratosfena(num):
-    sieve = set()
+    time_s = time.time()
+    sieve = set(range(2, num**2))
     prost_set = set()
-    for i in range(1, num):
-        sieve = set(range(2, 10*i))
-        # prost_set = set()
-
+    list_prost = list()
     while sieve:
         prime = min(sieve)
         prost_set.add(prime)
-        sieve -= set(range(prime, i + 1, prime))
-    return print(*sieve)
+        sieve -= set(range(prime, num**2, prime))
+    list_prost = list(prost_set)
+    list_prost.sort()
+    time_f = time.time()
+    print(time_f - time_s)
+    if num == 1:
+        return print('2')
+    else:
+        return print(list_prost[:num], list_prost[num-1])
+    return
 
 if __name__ == '__main__':
     number = int(input('Введите порядковый номер простого числа: '))
     simple_number(number)
-    # simple_number_reweto_eratosfena(number)
+    simple_number_reweto_eratosfena(number)
  # FIN
+
     
     
-# Асимптотический анализ:
+# Асимптотический анализ(прямой метод поиска):
 #   выполняется проверка соответствия порядкового номера простого числа и введённого пользователем требуемого номера простого числа, простая единичная операция
 #   затем проводится перебор делением всех чисел, от 2 до целой половины последующего числа в цикле, n**2 операций
 # Оцениваю сложность алгоритма как О(n**2) - квадратичная сложность.
@@ -58,7 +65,9 @@ if __name__ == '__main__':
 # Введите порядковый номер простого числа: 1500
 # 0.5033364295959473
 
-# 
-#
-#
-#
+
+# Асимптотический анализ(метод решета Эратосфена): 
+#   формирование множества - линейная операция
+#   поиск минимального элемента множества - n
+#   вычитание множеств - линейная операция (возможно, как вычитаются множества в пайтоне - не знаю пока что)
+# Оцениваю сложность алгоритма как О(n) - линейная сложность
